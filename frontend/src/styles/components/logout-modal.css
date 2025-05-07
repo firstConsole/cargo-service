@@ -1,0 +1,122 @@
+/* Modal Styles */
+.logout-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: modal-fade-in 0.3s ease-out;
+}
+
+.logout-modal-content {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 24px;
+    border-radius: 12px;
+    text-align: center;
+    width: 320px;
+    max-width: 90%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: modal-slide-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    color: #ffffff;
+}
+
+.logout-modal-content p {
+    margin: 0 0 24px;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+}
+
+.logout-modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.logout-modal-content button {
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+#confirm-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+#confirm-button:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+#cancel-button {
+    background-color: #34495e;
+    color: white;
+}
+
+#cancel-button:hover {
+    background-color: #2c3e50;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 73, 94, 0.3);
+}
+
+/* Анимации */
+@keyframes modal-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modal-slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Эффект блюра для фона приложения */
+body.modal-open {
+    overflow: hidden;
+}
+
+body.modal-open > *:not(#modal-root) {
+    filter: blur(5px);
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    .logout-modal-content {
+        width: 280px;
+        padding: 20px;
+    }
+
+    .logout-modal-content p {
+        font-size: 15px;
+    }
+
+    .logout-modal-content button {
+        padding: 8px 20px;
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,658 @@
+/* Определяем CSS-переменные для гибкости и тем */
+:root {
+    --primary-bg: linear-gradient(135deg, rgba(20, 20, 40, 0.6) 0%, rgba(10, 10, 30, 0.8) 100%);
+    --accent-color: #6b7280;
+    --text-color: #e5e7eb;
+    --border-color: rgba(255, 255, 255, 0.15);
+    --button-bg: rgba(255, 255, 255, 0.1);
+    --button-hover-bg: rgba(255, 255, 255, 0.2);
+    --shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    --blur: blur(40px);
+    --font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Основная панель */
+.control-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    background: var(--primary-bg);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+    box-shadow: var(--shadow);
+    min-height: 72px;
+    position: relative;
+    z-index: 50;
+    border-radius: 0;
+    width: 100%;
+    margin: 0;
+    transition: box-shadow 0.3s ease;
+}
+
+.control-panel:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Левая часть панели */
+.control-panel-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    flex: 2;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
+    padding-right: 8px;
+    height: 100%;
+    user-select: none;
+}
+
+.control-panel-left::-webkit-scrollbar {
+    height: 4px;
+}
+
+.control-panel-left::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.control-panel-left::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.control-panel-left::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent-color);
+}
+
+/* Группы управления */
+.control-group {
+    display: flex;
+    flex-direction: column;
+    min-width: max-content;
+    position: relative;
+    height: 54px; /* Увеличена высота, чтобы вместить заголовок и кнопки */
+    user-select: none;
+    padding-top: 14px; /* Отступ для заголовка */
+    justify-content: flex-start;
+    gap: 4px;
+}
+
+/* Заголовки */
+.control-header {
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: left;
+    font-family: var(--font-family);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.control-group:hover .control-header {
+    opacity: 1;
+}
+
+/* Кнопки */
+.control-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: var(--button-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-color);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 30px;
+    white-space: nowrap;
+    user-select: none;
+    font-family: var(--font-family);
+    position: relative;
+    overflow: hidden;
+}
+
+.control-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.control-button:hover::before {
+    left: 100%;
+}
+
+.control-button:hover {
+    background: var(--button-hover-bg);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.control-button.small {
+    padding: 4px 8px;
+    font-size: 11px;
+    height: 26px;
+}
+
+/* Разделитель */
+.control-divider {
+    width: 1px;
+    align-self: stretch;
+    background: var(--border-color);
+    margin: 0 4px;
+    transition: background 0.3s ease;
+}
+
+.period-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.period-select {
+    background: var(--button-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-color);
+    padding: 4px 8px;
+    font-size: 11px;
+    outline: none;
+    height: 26px;
+    font-family: var(--font-family);
+    transition: all 0.3s ease;
+}
+
+.period-select:hover {
+    background: var(--button-hover-bg);
+    border-color: var(--accent-color);
+}
+
+.period-select option {
+    background: #1f2937;
+    color: var(--text-color);
+}
+
+/* Группа кнопок */
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Цветовые форматы */
+.color-formats {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 2px;
+}
+
+.color-format-item {
+    display: flex;
+    align-items: center;
+}
+
+.color-square {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.color-square:hover {
+    transform: scale(1.15);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Центральная часть */
+.control-panel-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 0 32px;
+    align-items: center;
+    user-select: none;
+}
+
+.search-container {
+    display: flex;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    user-select: none;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 10px 44px 10px 16px;
+    background: var(--button-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    color: var(--text-color);
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+    height: 40px;
+    font-family: var(--font-family);
+}
+
+.search-container input:focus {
+    background: var(--button-hover-bg);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.search-container input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
+}
+
+.search-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.search-button:hover {
+    color: var(--accent-color);
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Правая часть */
+.control-panel-right {
+    display: flex;
+    gap: 12px;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+    user-select: none;
+}
+
+.action-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: var(--button-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-color);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 54px;
+    width: 84px;
+    user-select: none;
+    font-family: var(--font-family);
+    position: relative;
+    overflow: hidden;
+}
+
+.action-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.action-button:hover::before {
+    left: 100%;
+}
+
+.action-button:hover {
+    background: var(--button-hover-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.action-button svg {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.action-button:hover svg {
+    transform: scale(1.1);
+}
+
+/* Добавляем стили для индикатора загрузки и сообщений об ошибках */
+.loading-indicator {
+    font-size: 0.8em;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+.error-message {
+    color: #e53e3e;
+    font-size: 0.75rem;
+    margin-top: 4px;
+}
+
+/* Адаптивность */
+
+/* Планшеты (768px–1200px) */
+@media (max-width: 1200px) {
+    .control-panel {
+        flex-wrap: wrap;
+        padding: 10px 16px;
+        min-height: auto;
+    }
+
+    .control-panel-left {
+        order: 2;
+        flex: 1 0 100%;
+        margin-top: 8px;
+        gap: 6px;
+        padding-right: 6px;
+        align-items: flex-start;
+    }
+
+    .control-group {
+        padding-top: 12px; /* Уменьшенный отступ для заголовка */
+        gap: 3px;
+        height: 48px; /* Уменьшенная высота */
+    }
+
+    .control-header {
+        font-size: 8px;
+        letter-spacing: 0.6px;
+    }
+
+    .control-button {
+        padding: 5px 10px;
+        font-size: 11px;
+        height: 28px;
+        border-radius: 5px;
+    }
+
+    .control-button.small {
+        padding: 3px 6px;
+        font-size: 10px;
+        height: 24px;
+    }
+
+    .control-divider {
+        margin: 0 3px;
+    }
+
+    .period-select {
+        padding: 3px 6px;
+        font-size: 10px;
+        height: 24px;
+    }
+
+    .color-square {
+        width: 14px;
+        height: 14px;
+    }
+
+    .control-panel-center {
+        order: 1;
+        flex: 1 0 60%;
+        padding: 0 16px 0 0;
+    }
+
+    .search-container {
+        max-width: 300px;
+    }
+
+    .search-container input {
+        padding: 8px 36px 8px 12px;
+        font-size: 13px;
+        height: 36px;
+    }
+
+    .search-button {
+        font-size: 16px;
+        padding: 6px;
+    }
+
+    .control-panel-right {
+        order: 1;
+        flex: 1 0 40%;
+        gap: 8px;
+    }
+
+    .action-button {
+        padding: 8px 12px;
+        height: 48px;
+        width: 72px;
+        font-size: 11px;
+    }
+
+    .action-button svg {
+        font-size: 18px;
+    }
+}
+
+/* Мобильные устройства (<768px) */
+@media (max-width: 768px) {
+    .control-panel {
+        padding: 8px 12px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .control-panel-left {
+        flex-direction: row;
+        margin-top: 6px;
+        gap: 4px;
+        padding: 0 4px;
+        overflow-x: auto;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .control-group {
+        padding-top: 10px; /* Уменьшенный отступ для заголовка */
+        gap: 2px;
+        min-width: 80px;
+        height: 44px; /* Уменьшенная высота */
+    }
+
+    .control-header {
+        font-size: 7px;
+        letter-spacing: 0.5px;
+    }
+
+    .control-button {
+        padding: 4px 8px;
+        font-size: 10px;
+        height: 26px;
+        border-radius: 4px;
+    }
+
+    .control-button.small {
+        padding: 2px 4px;
+        font-size: 9px;
+        height: 22px;
+    }
+
+    .control-divider {
+        margin: 0 2px;
+    }
+
+    .period-controls {
+        gap: 4px;
+    }
+
+    .period-select {
+        padding: 2px 4px;
+        font-size: 9px;
+        height: 22px;
+    }
+
+    .color-formats {
+        gap: 4px;
+        margin-top: 1px;
+    }
+
+    .color-square {
+        width: 12px;
+        height: 12px;
+    }
+
+    .control-panel-center {
+        flex: 1 0 100%;
+        padding: 8px 0;
+    }
+
+    .search-container {
+        max-width: 100%;
+    }
+
+    .search-container input {
+        padding: 6px 32px 6px 10px;
+        font-size: 12px;
+        height: 32px;
+        border-radius: 20px;
+    }
+
+    .search-button {
+        font-size: 14px;
+        padding: 4px;
+    }
+
+    .control-panel-right {
+        flex: 1 0 100%;
+        justify-content: flex-start;
+        gap: 6px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+
+    .action-button {
+        padding: 6px 10px;
+        height: 42px;
+        width: 64px;
+        font-size: 10px;
+    }
+
+    .action-button svg {
+        font-size: 16px;
+    }
+}
+
+/* Очень маленькие экраны (<480px) */
+@media (max-width: 480px) {
+    .control-panel {
+        padding: 6px 8px;
+    }
+
+    .control-panel-left {
+        gap: 3px;
+        padding: 0 2px;
+    }
+
+    .control-group {
+        padding-top: 8px; /* Минимальный отступ для заголовка */
+        min-width: 70px;
+        height: 40px; /* Уменьшенная высота */
+    }
+
+    .control-header {
+        font-size: 6px;
+        letter-spacing: 0.4px;
+    }
+
+    .control-button {
+        padding: 3px 6px;
+        font-size: 9px;
+        height: 24px;
+        border-radius: 4px;
+    }
+
+    .control-button.small {
+        padding: 2px 3px;
+        font-size: 8px;
+        height: 20px;
+    }
+
+    .control-divider {
+        margin: 0 1px;
+    }
+
+    .period-controls {
+        gap: 3px;
+    }
+
+    .period-select {
+        padding: 2px 3px;
+        font-size: 8px;
+        height: 20px;
+    }
+
+    .color-square {
+        width: 10px;
+        height: 10px;
+    }
+
+    .control-panel-center {
+        padding: 6px 0;
+    }
+
+    .search-container input {
+        padding: 5px 28px 5px 8px;
+        font-size: 11px;
+        height: 30px;
+    }
+
+    .search-button {
+        font-size: 13px;
+        padding: 3px;
+    }
+
+    .control-panel-right {
+        gap: 4px;
+        padding-bottom: 2px;
+    }
+
+    .action-button {
+        padding: 5px 8px;
+        height: 38px;
+        width: 58px;
+        font-size: 9px;
+    }
+
+    .action-button svg {
+        font-size: 14px;
+    }
+}
